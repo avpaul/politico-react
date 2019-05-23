@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './navbar.scss';
+import logoImage from './favicon.png';
 
 export default class Nav extends Component {
   constructor() {
@@ -12,18 +13,35 @@ export default class Nav extends Component {
 
   render() {
     return (
-      <Router>
-        <nav>
-          <Link to="/">Politico</Link>
-          <div className="nav_spacer" />
-          <div className="menu">
-            <Link to="/">candidates</Link>
-            <Link to="/">parties</Link>
-            <Link to="/">results</Link>
-            {/* <Link to="/">profile</Link> */}
+      <div>
+        <nav className="nav">
+          <Link className="nav-logo" to="/">
+            <img className="logo-img" src={logoImage} alt="politico" srcSet="" />
+            Politico
+          </Link>
+          <div className="nav-spacer" />
+          <button className="btn btn-show-menu" type="button">
+            <i className="zmdi zmdi-menu" />
+          </button>
+          <div className="nav-menu">
+            <Link className="menu-item" to="/candidates">
+              candidates
+            </Link>
+            <Link className="menu-item" to="/parties">
+              parties
+            </Link>
+            <Link className="menu-item" to="/results">
+              results
+            </Link>
+            <Link className="menu-item profile-img" to="/profile">
+              <i className="zmdi zmdi-account-o" />
+            </Link>
+            <button className="btn btn-close-menu" type="button">
+              <i className="zmdi zmdi-close"></i>
+            </button>
           </div>
         </nav>
-      </Router>
+      </div>
     );
   }
 }

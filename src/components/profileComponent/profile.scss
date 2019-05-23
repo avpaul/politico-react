@@ -1,0 +1,121 @@
+$xs-min: 30rem;
+
+.main-content-profile {
+  & > .row {
+    justify-content: center;
+    margin-top: 1rem;
+  @media screen and (max-width: $xs-min) {
+    display: block;
+  }
+  }
+  .card {
+    margin: 1rem;
+  }
+  .card-profile-info {
+    width: 35%;
+    padding: 32px;
+    background-color: #ececec;
+    @media screen and (max-width: $xs-min) {
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .card-title {
+    padding-left: 24px;
+    font-family: "Ubuntu", "Courier new";
+    font-size: 1.6rem;
+    .icon {
+      padding-right: 8px;
+      color: #563838;
+      line-height: 1.6rem;
+    }
+  }
+
+  .card-actions {
+    display: flex;
+    justify-content: flex-end;
+    .btn {
+      margin-right: 8px;
+      background-color: #a7414a;
+      color: #fff;
+      &.btn-discard-update {
+        margin-right: 16px;
+        background-color: transparent;
+        color: initial;
+        border-color: #a7414a;
+        transition: 0.25s ease-in-out background-color;
+      }
+      &.btn-discard-update:hover {
+        background-color: #a7414a;
+        color: #fff;
+      }
+    }
+  }
+
+  .aside {
+    margin-left: 32px;
+    @media screen and (max-width: $xs-min) {
+      margin-left: 0px;
+    }
+  }
+
+  .card-profile {
+    position: relative;
+    height: 200px;
+
+    img {
+      display: block;
+      height: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      border: 4px #888 solid;
+      border-radius: 50%;
+    }
+    .btn-profile-img-change {
+      position: absolute;
+      bottom: -48px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-color: #a7414a;
+      transition: 0.25s ease-in-out background-color;
+
+      &:hover {
+        background-color: #a7414a;
+        color: #fff;
+      }
+    }
+  }
+  .table-container {
+    margin-top: 72px;
+  }
+  .table-header {
+    padding: 16px;
+    background-color: #ececec;
+    font-family: "Ubuntu", "Courier new";
+    font-size: 1.4rem;
+    .icon {
+      padding-right: 8px;
+      line-height: 1.4rem;
+      color: #563838;
+    }
+  @media screen and (max-width: $xs-min) {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }    
+  }
+  tbody td {
+    color: #00000095;
+  }
+  @media screen and (max-width: $xs-min) {
+    table.recent-votes thead tr th:last-of-type,
+    table.recent-votes tbody tr td:last-of-type{
+      display: none;
+    }
+    table tbody tr:last-of-type td{
+      border-bottom: none;
+    }
+  }
+}
