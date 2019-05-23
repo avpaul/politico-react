@@ -1,0 +1,96 @@
+$xs-min: 30rem;
+
+.main-content.signUp {
+  display: flex;
+  @media screen and (max-width: $xs-min) {
+    display: block;
+  }
+}
+.banner.banner-signUp {
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 60%;
+  margin-bottom: 64px;
+  padding-left: 64px;
+  padding-right: 64px;
+  text-align: center;
+  @media screen and (max-width: $xs-min) {
+    display: none;
+  }
+  .banner-img {
+    width: 100%;
+    img {
+      display: inline-block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  .banner-content {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.form-content {
+  width: 40%;
+  height: 100%;
+  margin-top: 64px;
+  @media screen and (max-width: $xs-min) {
+    width: 80%;
+    margin: 32px auto;
+  }
+}
+
+.card-signUp {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  @media screen and (max-width: $xs-min) {
+    width: 100%;
+  }
+  .card-title {
+    padding: 16px;
+    background-color: #282627;
+    color: #fff;
+    text-align: center;
+    font-size: 1.6rem;
+  }
+  .card-content {
+    height: 300px;
+    padding: 16px;
+    background-color: #282627;
+  }
+  .card-action {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 24px 16px;
+    background-color: #282627;
+  }
+  .card-footer {
+    height: 100px;
+    padding: 24px 16px;
+    text-align: center;
+    a {
+      display: inline-block;
+      margin-bottom: 0.5rem;
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+      border-bottom: 2px solid #0aaff1;
+      font-style: italic;
+      letter-spacing: 0.5px;
+      word-spacing: 2px;
+    }
+  }
+  .input-field {
+    input {
+      color: #ececec;
+    }
+    label {
+      text-transform: capitalize;
+      color: #999;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+/* TABLE */
+table {
+  border-collapse: collapse;
+  margin: 8px auto;
+  color: var(--primary-color);
+}
+
+thead th {
+  text-transform: uppercase;
+}
+
+tbody td {
+  text-transform: capitalize;
+}
+
+th,
+td {
+  border-bottom: #563838 2px solid;
+  padding: 0.5rem 0.75rem;
+  font-size: 16px;
+  text-align: center;
+  vertical-align: middle;
+}

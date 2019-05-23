@@ -1,0 +1,232 @@
+$xs-min: 30rem;
+
+.banner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 16px;
+  @media screen and (max-width: $xs-min) {
+    display: block;
+  }
+  .banner-content {
+    width: 50%;
+    padding-left: 64px;
+    padding-right: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    @media screen and (max-width: $xs-min) {
+      width: 100%;
+      padding-left: 32px;
+      padding-right: 32px;
+      padding-top: 32px;
+    }
+  }
+  .banner-heading {
+    font-size: 3rem;
+    @media screen and (max-width: $xs-min) {
+      font-size: 2rem;
+    }
+    .caption {
+      display: inline-block;
+      margin-left: 1rem;
+      font-size: 1.4rem;
+      border-bottom: 2px solid #a37c27;
+      @media screen and (max-width: $xs-min) {
+        font-size: 1.2rem;
+      }
+    }
+  }
+  .banner-action {
+    margin-top: 24px;
+    margin-left: 16px;
+    .btn {
+      margin-right: 8px;
+    }
+  }
+  .btn.btn-signup {
+    background-color: #a7414a;
+    color: #fff;
+  }
+  .btn.btn-vote {
+    border: 2px solid #a7414a;
+    &:hover {
+      background-color: #a7414a;
+      color: #fff;
+    }
+  }
+
+  .banner-img {
+    margin-top: 16px;
+    width: 50%;
+    @media screen and (max-width: $xs-min) {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    img {
+      width: 100%;
+    }
+  }
+}
+.feature-intro-heading {
+  display: block;
+  padding-left: 10%;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: #a37c27;
+  font-family: "Ubuntu", "Courier new";
+  font-weight: 500;
+  font-size: 2.4rem;
+  @media screen and (max-width: $xs-min) {
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+  }
+}
+.pt-features {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  @media screen and (max-width: $xs-min) {
+    display: block;
+  }
+}
+.pt-features-bottom {
+  display: flex;
+  flex-direction: row;
+  @media screen and (max-width: $xs-min) {
+    display: block;
+  }
+}
+.pt-feature {
+  display: flex;
+  flex-direction: row;
+  &:nth-of-type(2) {
+    justify-content: flex-end;
+  }
+  &.pt-feature-boxed {
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    @media screen and (max-width: $xs-min) {
+      width: 100%;
+    }
+  }
+  @media screen and (max-width: $xs-min) {
+    display: block;
+  }
+}
+
+.feature-img {
+  height: 350px;
+  img {
+    display: inline-block;
+    height: 100%;
+  }
+  &:first-of-type {
+    margin-left: 100px;
+    height: 400px;
+  }
+  &:nth-of-type(2) {
+    margin-right: 100px;
+    margin-top: -64px;
+    img {
+      border-radius: 8px;
+    }
+  }
+  @media screen and (max-width: $xs-min) {
+    height: 300px;
+    img {
+      display: block;
+    }
+    &:first-of-type {
+      height: 300px;
+      margin-left: 0;
+      margin-right: 0;
+      img {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+    &:nth-of-type(2) {
+      margin-right: 0;
+      margin-top: -0;
+      img {
+        width: 100%;
+        border-radius: 0px;
+      }
+    }
+  }
+}
+
+.feature-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 30%;
+  @media screen and (max-width: $xs-min) {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+}
+
+.pt-feature:nth-of-type(1) .feature-description {
+  margin-left: 50px;
+  .feature-caption {
+    color: #63bcae;
+  }
+}
+.pt-feature:nth-of-type(2) .feature-caption {
+  color: #2e3675;
+}
+
+.pt-feature-boxed .feature-description {
+  width: 60%;
+  @media screen and (max-width: $xs-min) {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.pt-feature-boxed:nth-of-type(2) {
+  .feature-img {
+    margin-top: 50px;
+    @media screen and (max-width: $xs-min) {
+      margin-top: 0px;
+    }
+  }
+  .feature-description {
+    margin-top: 50px;
+    @media screen and (max-width: $xs-min) {
+      margin-top: 0px;
+    }
+  }
+  .feature-caption {
+    color: #e2847c;
+  }
+}
+
+.feature-title {
+  margin-bottom: 8px;
+  font-size: 2rem;
+  font-family: "Ubuntu";
+  color: #282726;
+  @media screen and (max-width: $xs-min) {
+    text-align: center;
+  }
+}
+
+.feature-caption {
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  @media screen and (max-width: $xs-min) {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+}

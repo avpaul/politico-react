@@ -1,0 +1,106 @@
+:root {
+  --xs-min: 30rem;
+  --sm-min: 48rem;
+  --md-min: 64rem;
+  --lg-min: 75rem;
+}
+$xs-min: 30rem;
+
+// Elevations/Shadow box code is from MaterializeCss
+// Z-levels
+.z-depth-0 {
+  box-shadow: none !important;
+}
+
+/* 2dp elevation modified*/
+.z-depth-1 {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+.z-depth-1-half {
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -1px rgba(0, 0, 0, 0.2);
+}
+
+/* 6dp elevation modified*/
+.z-depth-2 {
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
+    0 2px 4px -1px rgba(0, 0, 0, 0.3);
+}
+
+/* 12dp elevation modified*/
+.z-depth-3 {
+  box-shadow: 0 8px 17px 2px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+}
+
+/* 16dp elevation */
+.z-depth-4 {
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
+    0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -7px rgba(0, 0, 0, 0.2);
+}
+
+/* 24dp elevation */
+.z-depth-5 {
+  box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14),
+    0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Lato", "Courier new";
+  font-size: 16px;
+  font-weight: 400;
+  box-sizing: border-box;
+}
+
+a[href] {
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer {
+  height: 200px;
+  margin-top: 50px;
+  padding: 28px 48px 48px;
+  color: #ffffff;
+  background-color: #282726;
+  @media screen and (max-width: $xs-min) {
+    height: 150px;
+    margin-top: 0;
+    padding: 16px;
+  }
+  .mail-block {
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .input-field {
+      width: 100%;
+      input {
+        color: #fff;
+      }
+      .btn {
+        //   .icon {
+        color: #fff;
+        //   }
+      }
+    }
+    @media screen and (max-width: $xs-min) {
+      width: 90%;
+    }
+  }
+}
+
+.footer-logo-text {
+  padding-left: 16px;
+  font-family: "Ubuntu", "Courier new";
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
