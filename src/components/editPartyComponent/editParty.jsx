@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
-import './profile.scss';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import './editParty.scss';
 
-export default class Profile extends Component {
+export default class EditParty extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      telephoneNumber: '',
-      party: '',
-    };
+    this.state = {};
   }
 
   render() {
@@ -20,17 +15,13 @@ export default class Profile extends Component {
         <div className="row">
           <div className="card card-profile-info">
             <div className="card-title">
-              <i className="zmdi zmdi-accounts-list-alt icon" />
-              Your profile info
+              <i className="zmdi zmdi-flag icon" />
+              party info
             </div>
             <div className="card-content">
               <div className="input-field input-field-stacked">
-                <label htmlFor="user-first-name">first name:</label>
+                <label htmlFor="user-first-name">name:</label>
                 <input id="user-first-name" type="text" />
-              </div>
-              <div className="input-field input-field-stacked">
-                <label htmlFor="user-first-name">last name:</label>
-                <input id="user-last-name" type="text" />
               </div>
               <div className="input-field input-field-stacked">
                 <label htmlFor="user-first-name">email:</label>
@@ -41,12 +32,12 @@ export default class Profile extends Component {
                 <input id="user-email" type="tel" />
               </div>
               <div className="input-field input-field-stacked">
-                <label htmlFor="user-first-name">party:</label>
-                <input id="user-email" type="text" />
-              </div>
-              <div className="input-field input-field-stacked">
                 <label htmlFor="user-first-name">address:</label>
                 <input id="user-email" type="text" />
+              </div>
+              <div className="input-field">
+                <label htmlFor="user-first-name">description:</label>
+                <textarea name="user-first-name" id="user-first-name" cols="30" rows="10" />
               </div>
             </div>
 
@@ -75,14 +66,14 @@ export default class Profile extends Component {
               </button>
             </div>
 
-            <div className="table-container">
+            {/* <div className="table-container">
               <h2 className="table-header">
                 <i className="zmdi zmdi-view-list icon" />
                 Recent activities
               </h2>
-              <table className="recent-votes">
-                <thead>
-                  <tr>
+               <table className="recent-votes">
+                 <thead>
+                   <tr>
                     <th>date</th>
                     <th>election</th>
                     <th>candidate</th>
@@ -116,7 +107,7 @@ export default class Profile extends Component {
                   </tr>
                 </tbody>
               </table>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -92,5 +92,16 @@ $xs-min: 30rem;
       text-transform: capitalize;
       color: #999;
     }
+    .error{
+      color: #a7414a;
+    }
+  }
+  .signup-errors{
+    text-align: center;
+    color: #a7414a;
+
+    &::first-letter{
+      text-transform: capitalize;
+    }
   }
 }
