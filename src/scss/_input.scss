@@ -28,7 +28,7 @@
       color: #a37c2775;
     }
   }
-  input {
+  input,textarea {
     box-sizing: border-box;
     position: absolute;
     bottom: 0;
@@ -73,11 +73,31 @@
       top: 80%;
       transform: translateY(-80%);
       text-transform: capitalize;
-      z-index: 100000
+      z-index: 100000;
     }
     input {
       padding-left: 125px;
       padding-bottom: 8px;
+    }
+  }
+  .error {
+    position: absolute;
+    bottom: -20px;
+    right: 8px;
+    font-size: .8rem;
+    &::first-letter{
+      text-transform: uppercase;
+    }
+    &.active{
+      display: inline-block;
+    }
+  }
+
+  textarea{
+    top: 42px;
+    height: auto;
+    &:focus{
+      outline: none;
     }
   }
 }
