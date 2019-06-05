@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import './profile.scss';
 
 export default class Profile extends Component {
@@ -11,10 +12,30 @@ export default class Profile extends Component {
       password: '',
       telephoneNumber: '',
       party: '',
+      auth: false,
     };
   }
 
+  componentWillMount() {
+    // check if the user is logged in
+    // if the user is logged in the token must be in th local storage
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.setState({ auth: true });
+    }
+
+    // update the state with user info
+    const user = localStorage.getItem('user');
+    if (user) {
+      this.setState({});
+    }
+  }
+
   render() {
+    const { auth } = this.state;
+    if (!auth) {
+      return <Redirect to="/" />;
+    }
     return (
       <div className="main-content main-content-profile">
         <div className="row">
