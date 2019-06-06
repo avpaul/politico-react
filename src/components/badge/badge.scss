@@ -1,0 +1,36 @@
+.badge {
+  display: none;
+  position: absolute;
+  min-height: 36px;
+  padding: 8px 16px;
+  border-radius: 2px;
+  background-color: #a7414a;
+  color: #ffffff;
+  font-size: 1.2rem;
+  line-height: 1.4rem;
+  transition: display ease-in-out 1s;
+  &.active {
+    display: block;
+  }
+  &.badge-success {
+    background-color: #3F88C5;
+  }
+  @extend .z-depth-1-half;
+  .icon {
+    color: #000000;
+    font-size: 1.4rem;
+    line-height: inherit;
+    vertical-align: bottom;
+  }
+  span {
+    display: inline-block;
+    line-height: inherit;
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+}
+.z-depth-1-half {
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -1px rgba(0, 0, 0, 0.2);
+}

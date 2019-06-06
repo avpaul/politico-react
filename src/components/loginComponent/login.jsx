@@ -27,13 +27,16 @@ export default class Login extends Component {
         password,
       })
       .then((response) => {
-        if (response.status === 200) {
-          const { token } = response.data.data[0];
-          const { user } = response.data.data[0];
-          localStorage.setItem('token', token);
-          localStorage.setItem('user', user);
-          this.props.history.push('/candidates');
+        const { token, user } = response.data;
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(user));
+
+        if (!user.lastName || !user.firstName) {
+          // redirect the user to the profile page to complete the profile information
+          // add message to update profile
+          return this.props.history.push('/profile');
         }
+        return this.props.history.push('/candidates');
       })
       .catch((error) => {
         const { data } = error.response;

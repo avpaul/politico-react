@@ -33,8 +33,6 @@ export default class Signup extends Component {
         email,
         password,
         confirmPassword: passwordValidation,
-        firstname: 'paul',
-        lastname: 'av',
       })
       .then((response) => {
         if (response.status === 201) {
