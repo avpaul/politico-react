@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import disabledPersonImg from './disabled.jpg';
 import './home.scss';
@@ -7,11 +7,27 @@ export default class Home extends Component {
   constructor() {
     super();
     this.state = {
-      isLoggedIn: true,
+      auth: false,
     };
   }
 
+  componentWillMount() {
+    // check if the user is logged in
+    // if the user is logged in the token must be in th local storage
+    // the token should not be expired
+    const token = localStorage.getItem('token');
+    if (token) {
+      const payload = JSON.parse(window.atob(token.split('.')[1]));
+      if (Date.now() > payload.exp * 1000) {
+        this.setState({ auth: false });
+        return;
+      }
+      this.setState({ auth: true });
+    }
+  }
+
   render() {
+    const { auth } = this.state;
     return (
       <div className="main-content">
         <div className="banner">
@@ -21,12 +37,20 @@ export default class Home extends Component {
               <span className="caption"> - Just do it and do it wisely.</span>
             </h1>
             <div className="banner-action">
-              <Link className="btn btn-signup" to="/signup">
-                sign up
-              </Link>
-              <Link className="btn btn-outline btn-vote" to="/candidates">
-                vote
-              </Link>
+              {!auth ? (
+                <Fragment>
+                  <Link className="btn btn-signup" to="/signup">
+                    sign up
+                  </Link>
+                  <Link className="btn btn-outline btn" to="/login">
+                    login
+                  </Link>
+                </Fragment>
+              ) : (
+                <Link className="btn btn-vote" to="/candidates">
+                  vote
+                </Link>
+              )}
             </div>
           </div>
           <div className="banner-img">

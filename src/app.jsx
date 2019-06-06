@@ -27,14 +27,14 @@ class App extends Component {
           <Nav />
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/signup" exact component={Signup} />
-            <Route path="/login" exact component={Login} />
-            <Route path="/candidates" exact component={Candidates} />
-            <Route path="/profile" exact component={Profile} />
-            <Route path="/results" exact component={Results} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/login" component={Login} />
+            <Route path="/candidates" component={Candidates} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/results" component={Results} />
             <Route path="/parties" exact component={Parties} />
-            <Route path="/parties/edit" exact component={EditPartyComponent} />
-            <Route path="/parties/new" exact component={EditPartyComponent} />
+            <Route path="/parties/edit" component={EditPartyComponent} />
+            <Route path="/parties/new" component={EditPartyComponent} />
             <Route component={NotFound} />
           </Switch>
           <footer className="footer">

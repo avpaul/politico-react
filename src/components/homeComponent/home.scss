@@ -44,16 +44,10 @@ $xs-min: 30rem;
       margin-right: 8px;
     }
   }
-  .btn.btn-signup {
+  .btn.btn-signup,
+  .btn.btn-vote {
     background-color: #a7414a;
     color: #fff;
-  }
-  .btn.btn-vote {
-    border: 2px solid #a7414a;
-    &:hover {
-      background-color: #a7414a;
-      color: #fff;
-    }
   }
 
   .banner-img {
