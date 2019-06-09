@@ -1,10 +1,6 @@
 # Politico TO BE UPDATED
 
-[![Build Status](https://travis-ci.com/avpaul/politico-db.svg?branch=develop)](https://travis-ci.com/avpaul/politico-db)
-[![Coverage Status](https://coveralls.io/repos/github/avpaul/politico-db/badge.svg?branch=develop)](https://coveralls.io/github/avpaul/politico-db?branch=develop&kill_cache=1)
-[![codecov](https://codecov.io/gh/avpaul/politico-db/branch/develop/graph/badge.svg)](https://codecov.io/gh/avpaul/politico-db)
-[![Maintainability](https://api.codeclimate.com/v1/badges/c089097efa55232f6aed/maintainability)](https://codeclimate.com/github/avpaul/politico-db/maintainability)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![CircleCI](https://circleci.com/gh/avpaul/politico-react.svg?style=svg)](https://circleci.com/gh/avpaul/politico-react) [![Test Coverage](https://api.codeclimate.com/v1/badges/e9a77118058b21a0c5cf/test_coverage)](https://codeclimate.com/github/avpaul/politico-react/test_coverage) [![Maintainability](https://api.codeclimate.com/v1/badges/e9a77118058b21a0c5cf/maintainability)](https://codeclimate.com/github/avpaul/politico-react/maintainability) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 <p align="center">
   <a href="http://avpaul.github.io/politico">

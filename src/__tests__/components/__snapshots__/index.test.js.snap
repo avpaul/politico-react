@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components render result card 1`] = `ShallowWrapper {}`;
+
+exports[`components render result card 2`] = `ShallowWrapper {}`;
+
+exports[`components render result card 3`] = `ShallowWrapper {}`;
+
+exports[`components should render a badge component 1`] = `ShallowWrapper {}`;
+
+exports[`components should render a navbar component 1`] = `ShallowWrapper {}`;
