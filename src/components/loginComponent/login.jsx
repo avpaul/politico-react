@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { loginUser } from '../../actions';
 import './login.scss';
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,45 +15,31 @@ export default class Login extends Component {
     };
   }
 
-  signInUser = () => {
+  componentDidUpdate(prevProps) {
+    const { redirectTo, history } = this.props;
+    if (prevProps.redirectTo !== redirectTo) {
+      history.push(redirectTo.to);
+    }
+  }
+
+  static getDerivedStateFromProps(nextProps) {
+    if (nextProps.errors !== '') {
+      return { errors: { all: nextProps.errors } };
+    }
+    return null;
+  }
+
+  signInUser = (e) => {
+    e.preventDefault();
     const errors = {};
     const { email, password } = this.state;
+    const { onLogin } = this.props;
     if (password.length < 6) {
       errors.password = 'password must be 6 or more';
       this.setState({ errors });
-      return;
+    } else {
+      onLogin({ email, password });
     }
-    axios
-      .post('https://peoplevote.herokuapp.com/api/v1/auth/login', {
-        email,
-        password,
-      })
-      .then((response) => {
-        const { token, user } = response.data;
-        localStorage.setItem('token', token);
-        localStorage.setItem('user', JSON.stringify(user));
-
-        if (!user.lastName || !user.firstName) {
-          // redirect the user to the profile page to complete the profile information
-          // add message to update profile
-          return this.props.history.push('/profile');
-        }
-        return this.props.history.push('/candidates');
-      })
-      .catch((error) => {
-        const { data } = error.response;
-        if (data && data.error) {
-          errors.all = data.error;
-          this.setState({ errors });
-        } else {
-          errors.all = 'SignIn failed, please tyr again!';
-          this.setState(errors);
-        }
-      });
-  };
-
-  signInHandler = (e) => {
-    this.signInUser(e);
   };
 
   getErrors = (name) => {
@@ -86,7 +74,6 @@ export default class Login extends Component {
                 <div className="input-field">
                   <label htmlFor="user-email"> email</label>
                   <input
-                    id="user-email"
                     type="email"
                     value={email}
                     onChange={e => this.setState({ email: e.target.value })}
@@ -96,7 +83,6 @@ export default class Login extends Component {
                 <div className="input-field">
                   <label htmlFor="user-password">password</label>
                   <input
-                    id="user-password"
                     type="password"
                     value={password}
                     onChange={e => this.setState({ password: e.target.value })}
@@ -106,7 +92,7 @@ export default class Login extends Component {
                 <div className="error signup-errors">{this.getErrors('all')}</div>
               </div>
               <div className="card-action">
-                <button className="btn" type="button" onClick={this.signInHandler}>
+                <button className="btn" type="button" onClick={this.signInUser}>
                   login
                 </button>
               </div>
@@ -127,3 +113,18 @@ export default class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  redirectTo: propTypes.objectOf(propTypes.any).isRequired,
+  onLogin: propTypes.func.isRequired,
+  history: propTypes.objectOf(propTypes.any).isRequired,
+};
+
+function mapStateToProps({ redirectTo, errors }) {
+  return { redirectTo, errors };
+}
+
+export default connect(
+  mapStateToProps,
+  { onLogin: loginUser },
+)(Login);
