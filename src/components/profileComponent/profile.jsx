@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import propTypes from 'prop-types';
+import { updateProfile, fetchUserData } from '../../actions';
 import Badge from '../badge/badge';
 import './profile.scss';
 
-export default class Profile extends Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
-    this.state = {
+    const state = {
       firstName: '',
       lastName: '',
       email: '',
@@ -15,43 +17,35 @@ export default class Profile extends Component {
       phoneNumber: '',
       party: '',
       address: '',
-      auth: false,
-      message: '',
+      auth: '',
+      message: {},
       type: '',
     };
-  }
 
-  componentWillMount() {
-    // check if the user is logged in
-    // if the user is logged in the token must be in th local storage
-    // the token should not be expired
     const token = localStorage.getItem('token');
     if (token) {
       const payload = JSON.parse(window.atob(token.split('.')[1]));
       if (Date.now() > payload.exp * 1000) {
-        this.setState({ auth: false });
-        return;
+        state.auth = false;
+      } else {
+        state.auth = true;
       }
-      this.setState({ auth: true });
     }
+    this.state = state;
+  }
 
-    // update the state with user info
-    const user = JSON.parse(localStorage.getItem('user'));
+  // get user data
+  componentDidMount() {
+    const { onFetchUserData, user } = this.props;
+    onFetchUserData();
+    this.setState(user);
+  }
 
-    if (user) {
-      const {
-        firstName, lastName, phoneNumber, userProfile, email, party, address,
-      } = user;
-      this.setState({
-        firstName,
-        lastName,
-        phoneNumber,
-        userProfile,
-        email,
-        party,
-        address,
-      });
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.message !== prevState.message) {
+      return { message: nextProps.message };
     }
+    return null;
   }
 
   onInputChange = (e) => {
@@ -62,36 +56,20 @@ export default class Profile extends Component {
   };
 
   saveProfile = () => {
+    const { onUpdateProfile } = this.props;
     const {
       firstName, lastName, phoneNumber, userProfile, email, party, address,
     } = this.state;
-    const token = localStorage.getItem('token');
-    axios
-      .put(
-        'https://peoplevote.herokuapp.com/api/v1/auth/update',
-        {
-          firstName,
-          lastName,
-          phoneNumber,
-          userProfile,
-          email,
-          party,
-          address,
-        },
-        { headers: { authorization: `Bearer ${token}` } },
-      )
-      .then((response) => {
-        if (response.status === 200) {
-          const { user } = response.data;
-          console.log(user);
-          localStorage.setItem('user', JSON.stringify(user));
-          this.setState({ message: 'Profile updated', type: 'success' });
-        }
-      })
-      .catch((error) => {
-        console.log(error.message);
-        this.setState({ message: 'Profile update failed', type: 'error' });
-      });
+
+    onUpdateProfile({
+      firstName,
+      lastName,
+      phoneNumber,
+      userProfile,
+      email,
+      party,
+      address,
+    });
   };
 
   render() {
@@ -105,7 +83,6 @@ export default class Profile extends Component {
       party,
       address,
       message,
-      type,
     } = this.state;
 
     // if the user is not authenticated, redirect to the home page
@@ -115,7 +92,7 @@ export default class Profile extends Component {
     return (
       <div className="main-content main-content-profile">
         <div className="row">
-          {message && <Badge message={message} type={type} />}
+          {message.text && <Badge message={message.text} type={message.type} />}
           <div className="card card-profile-info">
             <div className="card-title">
               <i className="zmdi zmdi-accounts-list-alt icon" />
@@ -264,3 +241,24 @@ export default class Profile extends Component {
     );
   }
 }
+
+Profile.propTypes = {
+  onUpdateProfile: propTypes.func.isRequired,
+  onFetchUserData: propTypes.func.isRequired,
+};
+
+function mapStateToProps({ user, message, errors }) {
+  return {
+    user,
+    message,
+    errors,
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  {
+    onUpdateProfile: updateProfile,
+    onFetchUserData: fetchUserData,
+  },
+)(Profile);

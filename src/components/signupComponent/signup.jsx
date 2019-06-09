@@ -1,58 +1,54 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import propTypes from 'prop-types';
+import { createUser } from '../../actions';
 import './signup.scss';
 
-export default class Signup extends Component {
+class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
       password: '',
-      passwordValidation: '',
+      confirmPassword: '',
       errors: {},
     };
   }
 
-  createUser = () => {
+  componentDidUpdate(prevProps) {
+    const { redirectTo, history } = this.props;
+    if (prevProps.redirectTo !== redirectTo) {
+      history.push(redirectTo.to);
+    }
+  }
+
+  static getDerivedStateFromProps(nextProps) {
+    if (nextProps.errors !== '') {
+      return { errors: { all: nextProps.errors } };
+    }
+    return null;
+  }
+
+  createUser = (e) => {
+    e.preventDefault();
     const errors = {};
-    const { email, password, passwordValidation } = this.state;
+    const { email, password, confirmPassword } = this.state;
+    const { onCreateUser } = this.props;
+
+    // validate inputs
     if (password.length < 6) {
       errors.password = 'password must be 6 or more';
       this.setState({ errors });
       return;
     }
-    if (password !== passwordValidation) {
-      errors.passwordValidation = 'passwords not identical';
+    if (password !== confirmPassword) {
+      errors.confirmPassword = 'passwords not identical';
       this.setState({ errors });
       return;
     }
-
-    axios
-      .post('https://peoplevote.herokuapp.com/api/v1/auth/signup', {
-        email,
-        password,
-        confirmPassword: passwordValidation,
-      })
-      .then((response) => {
-        if (response.status === 201) {
-          this.props.history.push('/login');
-        }
-      })
-      .catch((error) => {
-        const { data } = error.response;
-        if (data && data.error) {
-          errors.all = data.error;
-          this.setState({ errors });
-        } else {
-          errors.all = 'SignUp failed, please tyr again!';
-          this.setState(errors);
-        }
-      });
-  };
-
-  signUpHandler = (e) => {
-    this.createUser(e);
+    // dispatch the create user action
+    onCreateUser({ email, password, confirmPassword });
   };
 
   getErrors = (name) => {
@@ -61,7 +57,7 @@ export default class Signup extends Component {
   };
 
   render() {
-    const { email, password, passwordValidation } = this.state;
+    const { email, password, confirmPassword } = this.state;
     return (
       <div className="main-content">
         <div className="row signUp">
@@ -87,7 +83,6 @@ export default class Signup extends Component {
                 <div className="input-field">
                   <label htmlFor="user-email"> email</label>
                   <input
-                    id="user-email"
                     type="email"
                     value={email}
                     onChange={e => this.setState({ email: e.target.value })}
@@ -97,7 +92,6 @@ export default class Signup extends Component {
                 <div className="input-field">
                   <label htmlFor="user-password">password</label>
                   <input
-                    id="user-password"
                     type="password"
                     value={password}
                     onChange={e => this.setState({ password: e.target.value })}
@@ -107,17 +101,16 @@ export default class Signup extends Component {
                 <div className="input-field">
                   <label htmlFor="user-password-validation">Validate password</label>
                   <input
-                    id="user-password-validation"
                     type="password"
-                    value={passwordValidation}
-                    onChange={e => this.setState({ passwordValidation: e.target.value })}
+                    value={confirmPassword}
+                    onChange={e => this.setState({ confirmPassword: e.target.value })}
                   />
-                  <span className="error">{this.getErrors('passwordValidation')}</span>
+                  <span className="error">{this.getErrors('confirmPassword')}</span>
                 </div>
                 <div className="error signup-errors">{this.getErrors('all')}</div>
               </div>
               <div className="card-action">
-                <button className="btn" type="button" onClick={this.signUpHandler}>
+                <button className="btn" type="button" onClick={this.createUser}>
                   signUp
                 </button>
               </div>
@@ -138,3 +131,21 @@ export default class Signup extends Component {
     );
   }
 }
+
+Signup.propTypes = {
+  redirectTo: propTypes.objectOf(propTypes.any).isRequired,
+  history: propTypes.arrayOf(propTypes.string).isRequired,
+  onCreateUser: propTypes.func.isRequired,
+};
+
+function mapStateToProps({ redirectTo, errors }) {
+  return {
+    redirectTo,
+    errors,
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { onCreateUser: createUser },
+)(Signup);
