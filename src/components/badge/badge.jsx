@@ -34,6 +34,7 @@ class Badge extends Component {
     );
   }
 }
+
 Badge.propTypes = {
   message: propTypes.string.isRequired,
   type: propTypes.string.isRequired,

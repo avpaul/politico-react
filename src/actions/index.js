@@ -6,17 +6,16 @@ import * as Types from '../actions-types';
  * helpers
  */
 
-const verifyToken = () => {
+export function verifyToken() {
   const token = localStorage.getItem('token');
   if (token) {
-    const payload = JSON.parse(window.atob(token.split('.')[1]));
+    const payload = JSON.parse(atob(token.split('.')[1]));
     if (Date.now() > payload.exp * 1000) {
       return false;
-    }
-    return true;
+    } return true;
   }
   return false;
-};
+}
 
 /**
  *
@@ -24,13 +23,13 @@ const verifyToken = () => {
  */
 
 export function loginUser({ email, password }) {
-  return (dispatch) => {
-    axios
-      .post('https://peoplevote.herokuapp.com/api/v1/auth/login', {
-        email,
-        password,
-      })
-      .then((response) => {
+  return dispatch => axios
+    .post('https://peoplevote.herokuapp.com/api/v1/auth/login', {
+      email,
+      password,
+    })
+    .then((response) => {
+      if (response.status === 200) {
         const { token, user } = response.data;
         localStorage.setItem('token', token);
         localStorage.setItem('user', JSON.stringify(user));
@@ -56,38 +55,30 @@ export function loginUser({ email, password }) {
             },
           });
         }
-      })
-      .catch((error) => {
-        const { data } = error.response;
-        dispatch({
-          type: Types.LOGIN_USER_FAIL,
-          payload: data.error || 'SignIn failed, please tyr again!',
-        });
+      }
+    })
+    .catch((error) => {
+      const { data } = error.response;
+      dispatch({
+        type: Types.LOGIN_USER_FAIL,
+        payload: data.error || 'SignIn failed, please tyr again!',
       });
-  };
-}
-
-export function createUserSuccess({ email, password }) {
-  return {
-    type: Types.LOGIN_USER_SUCCESS,
-    payload: { email, password },
-  };
+    });
 }
 
 export function createUser({ email, password, confirmPassword }) {
-  return (dispatch) => {
-    axios
-      .post('https://peoplevote.herokuapp.com/api/v1/auth/signup', {
-        email,
-        password,
-        confirmPassword,
-      })
-      .then(() => {
-        // dispatch({
-        //   type: Types.LOGIN_USER_SUCCESS,
-        //   payload: user,
-        // });
-
+  return dispatch => axios
+    .post('https://peoplevote.herokuapp.com/api/v1/auth/signup', {
+      email,
+      password,
+      confirmPassword,
+    })
+    .then((response) => {
+      // dispatch({
+      //   type: Types.LOGIN_USER_SUCCESS,
+      //   payload: user,
+      // });
+      if (response.status === 201) {
         dispatch({
           type: Types.REDIRECT,
           payload: {
@@ -95,21 +86,17 @@ export function createUser({ email, password, confirmPassword }) {
             message: 'Login to update your profile',
           },
         });
-      })
-      .catch((error) => {
-        const { data } = error.response;
+      }
+    })
+    .catch((error) => {
+      const { data } = error.response;
 
-        dispatch({
-          type: Types.CREATE_USER_FAIL,
-          payload: data.error || 'SignUp failed, please tyr again!',
-        });
+      dispatch({
+        type: Types.CREATE_USER_FAIL,
+        payload: data.error || 'SignUp failed, please tyr again!',
       });
-  };
+    });
 }
-
-export const createUserFail = () => {};
-export const loginUserSuccess = () => {};
-export const loginUserFail = () => {};
 
 export function updateProfile({
   firstName,
@@ -122,7 +109,7 @@ export function updateProfile({
 }) {
   return (dispatch) => {
     const token = localStorage.getItem('token');
-    axios
+    return axios
       .put(
         'https://peoplevote.herokuapp.com/api/v1/auth/update',
         {
