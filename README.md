@@ -1,7 +1,6 @@
 # Politico TO BE UPDATED
 
-[![CircleCI](https://circleci.com/gh/avpaul/politico-react.svg?style=svg)](https://circleci.com/gh/avpaul/politico-react) [![Test Coverage](https://api.codeclimate.com/v1/badges/e9a77118058b21a0c5cf/test_coverage)](https://codeclimate.com/github/avpaul/politico-react/test_coverage) [![Maintainability](https://api.codeclimate.com/v1/badges/e9a77118058b21a0c5cf/maintainability)](https://codeclimate.com/github/avpaul/politico-react/maintainability) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-
+[![CircleCI](https://circleci.com/gh/avpaul/politico-react.svg?style=svg)](https://circleci.com/gh/avpaul/politico-react) [![Test Coverage](https://api.codeclimate.com/v1/badges/e9a77118058b21a0c5cf/test_coverage)](https://codeclimate.com/github/avpaul/politico-react/test_coverage) [![Maintainability](https://api.codeclimate.com/v1/badges/e9a77118058b21a0c5cf/maintainability)](https://codeclimate.com/github/avpaul/politico-react/maintainability) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![Netlify Status](https://api.netlify.com/api/v1/badges/262c00a5-4240-434e-99af-fc3a43ae9723/deploy-status)](https://app.netlify.com/sites/peoplevote/deploys)
 <p align="center">
   <a href="http://avpaul.github.io/politico">
     <img
